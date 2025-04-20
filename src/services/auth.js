@@ -29,7 +29,7 @@ export const loginUser = async (payload) => {
     throw createHttpError(401, 'Unauthorized');
   }
 
-  await SessionsCollection.deleteOne({ userId: user._id });
+  await SessionsCollection.findOneAndDelete({ userId: user._id });
 
   const accessToken = randomBytes(30).toString('base64');
   const refreshToken = randomBytes(30).toString('base64');
@@ -44,7 +44,7 @@ export const loginUser = async (payload) => {
 };
 
 export const logoutUser = async (sessionId) => {
-  await SessionsCollection.deleteOne({ _id: sessionId });
+  await SessionsCollection.findOneAndDelete({ _id: sessionId });
 };
 
 const createSession = () => {
@@ -78,7 +78,7 @@ export const refreshUsersSession = async ({ sessionId, refreshToken }) => {
 
   const newSession = createSession();
 
-  await SessionsCollection.deleteOne({ _id: sessionId, refreshToken });
+  await SessionsCollection.findOneAndDelete({ _id: sessionId, refreshToken });
 
   return await SessionsCollection.create({
     userId: session.userId,
