@@ -7,7 +7,7 @@ import { SessionsCollection } from '../db/models/session.js';
 import {
   FIFTEEN_MINUTES,
   ONE_DAY,
-  SMTP,
+  // SMTP,
   TEMPLATES_DIR,
 } from '../constants/index.js';
 import jwt from 'jsonwebtoken';
@@ -128,20 +128,13 @@ export const requestResetToken = async (email) => {
     link: `${getEnvVar('APP_DOMAIN')}/reset-password?token=${resetToken}`,
   });
 
-  try {
-    await sendEmail({
-      from: getEnvVar(SMTP.SMTP_FROM),
-      to: email,
-      subject: 'Reset your password',
-      html,
-    });
-  } catch (err) {
-    if (err)
-      throw createHttpError(
-        500,
-        'Failed to send the email, please try again later.',
-      );
-  }
+  await sendEmail({
+    // from: getEnvVar(SMTP.SMTP_FROM),
+    from: getEnvVar('UKR_NET_EMAIL'),
+    to: email,
+    subject: 'Reset your password',
+    html,
+  });
 };
 
 export const resetPassword = async (payload) => {
