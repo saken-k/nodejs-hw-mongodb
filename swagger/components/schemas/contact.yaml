@@ -26,11 +26,11 @@ properties:
     type: string
     example: anna@gmail.com
   isFavourite:
-    description: "Contact's phone number"
+    description: 'Shows whether this contact is in the favorites list or not'
     type: boolean
     example: false
   contactType:
-    description: 'Shows whether this contact is in the favorites list or not'
+    description: 'Contact type'
     type: string
     enum: ['work', 'home', 'personal']
   userId:
@@ -40,4 +40,5 @@ properties:
   photo:
     description: "Link to contact's photo"
     type: string
+    format: binary
     example: https://res.cloudinary.com/dqbvgxvuv/image/upload/v1745613766/oullqiddnivk3rktmysi.png

@@ -14,7 +14,6 @@ requestBody:
           - name
           - phoneNumber
           - contactType
-          - userId
         properties:
           name:
             description: "Contact's name"
@@ -29,20 +28,17 @@ requestBody:
             type: string
             example: anna@gmail.com
           isFavourite:
-            description: "Contact's phone number"
+            description: 'Shows whether this contact is in the favorites list or not'
             type: boolean
             example: false
           contactType:
-            description: 'Shows whether this contact is in the favorites list or not'
+            description: 'Contact type'
             type: string
             enum: ['work', 'home', 'personal']
-          userId:
-            description: "Contact's user id"
-            type: string
-            example: 680bda0227afc12aa14ab79f
           photo:
             description: "Link to contact's photo"
             type: string
+            format: binary
             example: https://res.cloudinary.com/dqbvgxvuv/image/upload/v1745613766/oullqiddnivk3rktmysi.png
 responses:
   '201':
