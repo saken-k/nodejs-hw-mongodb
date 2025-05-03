@@ -1,0 +1,51 @@
+tags:
+  - Auth
+summary: Refresh user session
+operationId: refreshUsersSession
+description: Refreshes an expired user session using sessionId and refreshToken.
+security: []
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - sessionId
+          - refreshToken
+        properties:
+          sessionId:
+            type: string
+            description: ID of the current session
+            example: 64fd5a2cbe7c9c69a1d3f849
+          refreshToken:
+            type: string
+            description: Valid refresh token for the session
+            example: ki5SQTsAqSUMe3ORZ/pOlHF/rdLCChu3kzF8U2c6
+responses:
+  '200':
+    description: Successfully refreshed a session!
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - userId
+            - sessionId
+            - accessToken
+            - refreshToken
+          properties:
+            userId:
+              type: string
+            sessionId:
+              type: string
+            accessToken:
+              type: string
+            refreshToken:
+              type: string
+  '401':
+    description: Session not found or token expired
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/responses/401.yaml'

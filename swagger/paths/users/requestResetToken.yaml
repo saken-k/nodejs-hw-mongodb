@@ -1,0 +1,36 @@
+tags:
+  - Auth
+summary: Request password reset token
+operationId: requestResetToken
+description: Sends an email to the user with a password reset token.
+security: []
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - email
+        properties:
+          email:
+            type: string
+            description: Registered email address of the user
+            example: user@example.com
+responses:
+  '200':
+    description: Password reset email sent
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            message:
+              type: string
+              example: Reset password email has been successfully sent
+  '404':
+    description: User not found
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/responses/404-2.yaml'
